@@ -1,0 +1,47 @@
+/* Hero Section */
+.hero-section {
+  min-height: 60vh;
+  background: linear-gradient(rgba(26, 26, 46, 0.85), rgba(233, 69, 96, 0.75)),
+    url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1600&q=80') center/cover no-repeat;
+  padding: 80px 20px;
+}
+
+/* Movie Cards */
+.movie-card {
+  transition: transform 0.3s, box-shadow 0.3s;
+  border: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.movie-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.movie-poster {
+  height: 280px;
+  object-fit: cover;
+}
+
+/* Offer Cards */
+.card.border-danger,
+.card.border-success,
+.card.border-primary {
+  transition: transform 0.3s;
+}
+
+.card.border-danger:hover,
+.card.border-success:hover,
+.card.border-primary:hover {
+  transform: translateY(-3px);
+}
+
+/* Footer links */
+footer a.text-secondary:hover {
+  color: #e94560 !important;
+}
+
+footer .btn-outline-light:hover {
+  background-color: #e94560;
+  border-color: #e94560;
+}
