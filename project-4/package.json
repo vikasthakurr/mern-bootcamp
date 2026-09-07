@@ -1,0 +1,10 @@
+{
+  "name": "forgetest",
+  "version": "1.0.0",
+  "description": "A tiny JavaScript test framework built from scratch to demonstrate closures, objects, and functional programming.",
+  "type": "module",
+  "scripts": {
+    "test": "node run.js"
+  },
+  "license": "MIT"
+}

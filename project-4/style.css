@@ -1,0 +1,325 @@
+/* ForgeTest — dark, focused UI for a test runner. */
+
+:root {
+  --bg: #0b0f17;
+  --bg-elev: #121826;
+  --bg-elev-2: #172033;
+  --border: #223049;
+  --text: #e6edf6;
+  --text-dim: #9aa7bd;
+  --accent: #7c9cff;
+  --accent-2: #a06bff;
+  --pass: #4ade80;
+  --pass-bg: rgba(74, 222, 128, 0.12);
+  --fail: #ff6b6b;
+  --fail-bg: rgba(255, 107, 107, 0.12);
+  --radius: 14px;
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  line-height: 1.55;
+  min-height: 100vh;
+}
+
+.container {
+  width: min(960px, 92vw);
+  margin: 0 auto;
+}
+
+/* ---------- Header ---------- */
+.header {
+  position: relative;
+  padding: 3rem 0 2.5rem;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+
+.header-glow {
+  position: absolute;
+  inset: -40% 0 auto 0;
+  height: 320px;
+  background: radial-gradient(
+    600px 240px at 50% 0%,
+    rgba(124, 156, 255, 0.28),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.logo {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.logo span {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.tagline {
+  margin: 0.5rem 0 0;
+  color: var(--text-dim);
+  max-width: 46ch;
+}
+
+/* ---------- Main ---------- */
+.main {
+  padding: 2rem 0 4rem;
+}
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.btn-run {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #0b0f17;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  border: none;
+  padding: 0.7rem 1.4rem;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  box-shadow: 0 6px 20px rgba(124, 156, 255, 0.25);
+}
+
+.btn-run:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 28px rgba(124, 156, 255, 0.35);
+}
+
+.btn-run:active {
+  transform: translateY(0);
+}
+
+.filter-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.filter-toggle input {
+  accent-color: var(--accent);
+  width: 16px;
+  height: 16px;
+}
+
+/* ---------- Summary ---------- */
+.summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1.25rem;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.summary.all-pass {
+  border-color: rgba(74, 222, 128, 0.4);
+}
+
+.summary.has-fail {
+  border-color: rgba(255, 107, 107, 0.4);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.stat-value {
+  font-family: "Space Grotesk", sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.stat-value small {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+.stat-pass .stat-value {
+  color: var(--pass);
+}
+
+.stat-fail .stat-value {
+  color: var(--fail);
+}
+
+/* ---------- Results ---------- */
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.suite {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.suite-fail {
+  border-left: 3px solid var(--fail);
+}
+
+.suite-pass {
+  border-left: 3px solid var(--pass);
+}
+
+.suite-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.9rem 1.2rem;
+  background: var(--bg-elev-2);
+  border-bottom: 1px solid var(--border);
+}
+
+.suite-name {
+  font-family: "Space Grotesk", sans-serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.suite-tally {
+  display: inline-flex;
+  gap: 0.5rem;
+}
+
+.pill {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+}
+
+.pill-pass {
+  color: var(--pass);
+  background: var(--pass-bg);
+}
+
+.pill-fail {
+  color: var(--fail);
+  background: var(--fail-bg);
+}
+
+.test-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.test {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1.2rem;
+  border-bottom: 1px solid rgba(34, 48, 73, 0.5);
+}
+
+.test:last-child {
+  border-bottom: none;
+}
+
+.test-icon {
+  font-size: 0.95rem;
+  width: 1.2rem;
+  text-align: center;
+}
+
+.test-pass .test-icon {
+  color: var(--pass);
+}
+
+.test-fail .test-icon {
+  color: var(--fail);
+}
+
+.test-name {
+  font-size: 0.95rem;
+}
+
+.test-fail .test-name {
+  color: #ffd7d7;
+}
+
+.test-time {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.test-error {
+  grid-column: 2 / -1;
+  margin-top: 0.35rem;
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  color: var(--fail);
+  background: var(--fail-bg);
+  padding: 0.5rem 0.7rem;
+  border-radius: 8px;
+  white-space: pre-wrap;
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 1.5rem 0;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (max-width: 560px) {
+  .summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
