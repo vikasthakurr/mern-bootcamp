@@ -1,6 +1,3 @@
-// ===== Basic Form Validation =====
-
-// Login Form Validation
 document.getElementById('loginForm').addEventListener('submit', function (e) {
   e.preventDefault();
   if (!this.checkValidity()) {
@@ -13,7 +10,6 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
   bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
 });
 
-// Signup Form Validation
 document.getElementById('signupForm').addEventListener('submit', function (e) {
   e.preventDefault();
 
@@ -21,7 +17,6 @@ document.getElementById('signupForm').addEventListener('submit', function (e) {
   const confirmPassword = document.getElementById('signupConfirmPassword').value;
   const confirmInput = document.getElementById('signupConfirmPassword');
 
-  // Check if passwords match
   if (password !== confirmPassword) {
     confirmInput.setCustomValidity('Passwords do not match');
   } else {
@@ -39,7 +34,6 @@ document.getElementById('signupForm').addEventListener('submit', function (e) {
   bootstrap.Modal.getInstance(document.getElementById('signupModal')).hide();
 });
 
-// Reset confirm password validity on input
 document.getElementById('signupConfirmPassword').addEventListener('input', function () {
   const password = document.getElementById('signupPassword').value;
   if (this.value !== password) {
@@ -49,18 +43,15 @@ document.getElementById('signupConfirmPassword').addEventListener('input', funct
   }
 });
 
-// Booking Modal - Set movie name when opened
 document.getElementById('bookingModal').addEventListener('show.bs.modal', function (event) {
   const button = event.relatedTarget;
   const movieName = button.getAttribute('data-movie');
   document.getElementById('movieName').value = movieName;
 });
 
-// Booking Form Validation
 document.getElementById('bookingForm').addEventListener('submit', function (e) {
   e.preventDefault();
 
-  // Validate date is not in the past
   const dateInput = document.getElementById('bookingDate');
   const selectedDate = new Date(dateInput.value);
   const today = new Date();
@@ -77,11 +68,9 @@ document.getElementById('bookingForm').addEventListener('submit', function (e) {
     return;
   }
 
-  // Show success message
   this.classList.add('d-none');
   document.getElementById('bookingSuccess').classList.remove('d-none');
 
-  // Reset after 3 seconds
   setTimeout(() => {
     this.reset();
     this.classList.remove('was-validated', 'd-none');
@@ -90,7 +79,6 @@ document.getElementById('bookingForm').addEventListener('submit', function (e) {
   }, 3000);
 });
 
-// Reset date validity on change
 document.getElementById('bookingDate').addEventListener('change', function () {
   const selectedDate = new Date(this.value);
   const today = new Date();
@@ -100,4 +88,11 @@ document.getElementById('bookingDate').addEventListener('change', function () {
   } else {
     this.setCustomValidity('');
   }
+});
+
+document.getElementById('themeToggle').addEventListener('click', function () {
+  const root = document.documentElement;
+  const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+  root.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
 });
