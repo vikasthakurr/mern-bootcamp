@@ -1,32 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ResumeIQ - ATS Resume Scorer</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@latest/font/lucide.min.css">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="ResumeIQ - Score your resume against any job description. Instant ATS keyword matching, section analysis and improvement tips, all in your browser." />
+    <title>ResumeIQ - ATS Resume Scorer</title>
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("resumeiq.theme");
+          if (saved) document.documentElement.setAttribute("data-theme", saved);
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-static@latest/font/lucide.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header-glow" aria-hidden="true"></div>
+      <div class="container">
+        <div class="header-bar">
+          <h1 class="logo">Resume<span>IQ</span></h1>
+          <button id="themeToggle" class="theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle theme">
+            <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </button>
+        </div>
+        <div class="hero">
+          <span class="hero-badge"><i class="lucide lucide-sparkles" aria-hidden="true"></i> Beat the bots</span>
+          <h2 class="hero-title">Is your resume ready for the <span>ATS</span>?</h2>
+          <p class="hero-sub">Paste your resume and a job description to see your match score, missing keywords, and how to improve, instantly, right in your browser.</p>
+          <div class="hero-pills">
+            <span class="hero-pill"><i class="lucide lucide-zap" aria-hidden="true"></i> Instant scoring</span>
+            <span class="hero-pill"><i class="lucide lucide-file-check" aria-hidden="true"></i> PDF &amp; DOCX</span>
+            <span class="hero-pill"><i class="lucide lucide-lock" aria-hidden="true"></i> 100% private</span>
+          </div>
+        </div>
+      </div>
+    </header>
 
-  <!-- Header -->
-  <header class="header">
-    <div class="container">
-      <h1 class="logo">Resume<span>IQ</span></h1>
-      <p class="tagline">AI-Powered ATS Resume Scorer</p>
-    </div>
-  </header>
+    <main class="main">
+      <div class="container">
+        <div class="input-section">
+          <div class="input-card">
+            <span class="step-badge">1</span>
+            <h2><i class="lucide lucide-file-text" aria-hidden="true"></i> Your Resume</h2>
+            <p class="input-desc">Paste your resume, or upload a file (.txt, .pdf, .docx).</p>
 
-  <!-- Main Content -->
-  <main class="main">
-    <div class="container">
+            <div class="upload-row">
+              <label for="resumeFile" class="upload-btn">
+                <i class="lucide lucide-upload" aria-hidden="true"></i> Upload file
+              </label>
+              <input type="file" id="resumeFile" class="visually-hidden" accept=".txt,.pdf,.docx" />
+              <span id="resumeFileStatus" class="upload-status" aria-live="polite"></span>
+            </div>
 
-      <!-- Input Section -->
-      <div class="input-section">
-        <div class="input-card">
-          <h2><i class="lucide lucide-file-text"></i> Your Resume</h2>
-          <p class="input-desc">Paste your resume content below (skills, experience, education, etc.)</p>
-          <textarea id="resumeInput" placeholder="Example:
+            <label for="resumeInput" class="visually-hidden">Resume content</label>
+            <textarea
+              id="resumeInput"
+              placeholder="Example:
 John Doe
 Full Stack Developer
 
@@ -35,20 +83,33 @@ Skills: JavaScript, React, Node.js, MongoDB, Express, HTML, CSS, Git, REST APIs,
 Experience:
 - Software Engineer at TechCorp (2022-Present)
   Built scalable web applications using React and Node.js
-- Junior Developer at StartupXYZ (2020-2022)
-  Developed REST APIs and integrated third-party services
 
 Education:
 B.Tech in Computer Science - XYZ University (2020)
 
 Certifications:
-AWS Certified Developer, Meta Front-End Developer Certificate"></textarea>
-        </div>
+AWS Certified Developer"
+            ></textarea>
+            <p id="resumeError" class="field-error" role="alert"></p>
+          </div>
 
-        <div class="input-card">
-          <h2><i class="lucide lucide-target"></i> Job Description</h2>
-          <p class="input-desc">Paste the job description you're applying for</p>
-          <textarea id="jobInput" placeholder="Example:
+          <div class="input-card">
+            <span class="step-badge">2</span>
+            <h2><i class="lucide lucide-target" aria-hidden="true"></i> Job Description</h2>
+            <p class="input-desc">Paste the job description, or upload a file (.txt, .pdf, .docx).</p>
+
+            <div class="upload-row">
+              <label for="jobFile" class="upload-btn">
+                <i class="lucide lucide-upload" aria-hidden="true"></i> Upload file
+              </label>
+              <input type="file" id="jobFile" class="visually-hidden" accept=".txt,.pdf,.docx" />
+              <span id="jobFileStatus" class="upload-status" aria-live="polite"></span>
+            </div>
+
+            <label for="jobInput" class="visually-hidden">Job description content</label>
+            <textarea
+              id="jobInput"
+              placeholder="Example:
 We are looking for a Full Stack Developer with 2+ years of experience.
 
 Requirements:
@@ -57,89 +118,102 @@ Requirements:
 - Knowledge of REST APIs and GraphQL
 - Familiarity with Git and CI/CD pipelines
 - Strong problem-solving skills
-- Experience with TypeScript is a plus
-- AWS or cloud services experience preferred
-
-Responsibilities:
-- Build and maintain web applications
-- Collaborate with design and product teams
-- Write clean, testable code
-- Participate in code reviews"></textarea>
+- TypeScript and AWS experience preferred"
+            ></textarea>
+            <p id="jobError" class="field-error" role="alert"></p>
+          </div>
         </div>
-      </div>
 
-      <!-- Action Button -->
-      <div class="action-section">
-        <button id="analyzeBtn" class="btn-analyze"><i class="lucide lucide-scan-search"></i> Analyze Resume</button>
-      </div>
+        <div class="action-section">
+          <button id="analyzeBtn" class="btn-analyze" type="button">
+            <i class="lucide lucide-scan-search" aria-hidden="true"></i> Analyze Resume
+          </button>
+        </div>
 
-      <!-- Results Section -->
-      <div id="results" class="results-section hidden">
+        <section id="results" class="results-section hidden" aria-live="polite">
+          <div class="score-card">
+            <div class="score-circle">
+              <svg viewBox="0 0 100 100" role="img" aria-label="ATS match score">
+                <circle class="score-bg" cx="50" cy="50" r="45"></circle>
+                <circle id="scoreCircle" class="score-fill" cx="50" cy="50" r="45"></circle>
+              </svg>
+              <div class="score-text"><span id="scoreValue">0</span>%</div>
+            </div>
+            <h3 id="scoreLabel">ATS Score</h3>
+            <p id="scoreMessage" class="score-message"></p>
+          </div>
 
-        <!-- Score Circle -->
-        <div class="score-card">
-          <div class="score-circle">
-            <svg viewBox="0 0 100 100">
-              <circle class="score-bg" cx="50" cy="50" r="45"></circle>
-              <circle id="scoreCircle" class="score-fill" cx="50" cy="50" r="45"></circle>
-            </svg>
-            <div class="score-text">
-              <span id="scoreValue">0</span>%
+          <div class="breakdown-grid">
+            <div class="breakdown-card matched">
+              <h3><i class="lucide lucide-circle-check" aria-hidden="true"></i> Matched Keywords</h3>
+              <p class="breakdown-count" id="matchedCount">0</p>
+              <div id="matchedKeywords" class="keyword-list"></div>
+            </div>
+
+            <div class="breakdown-card missing">
+              <div class="card-head">
+                <h3><i class="lucide lucide-circle-x" aria-hidden="true"></i> Missing Keywords</h3>
+                <button id="copyMissingBtn" class="copy-btn" type="button">
+                  <i class="lucide lucide-copy" aria-hidden="true"></i> Copy
+                </button>
+              </div>
+              <p class="breakdown-count" id="missingCount">0</p>
+              <div id="missingKeywords" class="keyword-list"></div>
+              <span id="copyStatus" class="copy-status" aria-live="polite"></span>
+            </div>
+
+            <div class="breakdown-card sections">
+              <h3><i class="lucide lucide-clipboard-list" aria-hidden="true"></i> Section Analysis</h3>
+              <div id="sectionAnalysis" class="section-list"></div>
+            </div>
+
+            <div class="breakdown-card suggestions">
+              <h3><i class="lucide lucide-lightbulb" aria-hidden="true"></i> Improvement Tips</h3>
+              <ul id="suggestionsList" class="suggestions-list"></ul>
             </div>
           </div>
-          <h3 id="scoreLabel">ATS Score</h3>
-          <p id="scoreMessage" class="score-message"></p>
-        </div>
 
-        <!-- Detailed Breakdown -->
-        <div class="breakdown-grid">
-
-          <!-- Matched Keywords -->
-          <div class="breakdown-card matched">
-            <h3><i class="lucide lucide-circle-check"></i> Matched Keywords</h3>
-            <p class="breakdown-count" id="matchedCount">0</p>
-            <div id="matchedKeywords" class="keyword-list"></div>
+          <div class="category-section">
+            <h3><i class="lucide lucide-bar-chart-3" aria-hidden="true"></i> Category-wise Score</h3>
+            <div id="categoryBars" class="category-bars"></div>
           </div>
 
-          <!-- Missing Keywords -->
-          <div class="breakdown-card missing">
-            <h3><i class="lucide lucide-circle-x"></i> Missing Keywords</h3>
-            <p class="breakdown-count" id="missingCount">0</p>
-            <div id="missingKeywords" class="keyword-list"></div>
+          <div id="aiPanel" class="ai-panel hidden">
+            <div class="ai-head">
+              <h3><i class="lucide lucide-sparkles" aria-hidden="true"></i> AI Suggestions</h3>
+              <span class="ai-tag">Powered by Gemini</span>
+            </div>
+            <p class="ai-desc">Get tailored, AI-generated tips to raise your score. Your key is stored only in this browser.</p>
+            <div class="ai-key-row">
+              <label for="geminiKey" class="visually-hidden">Gemini API key</label>
+              <input type="password" id="geminiKey" class="ai-key-input" placeholder="Paste your Gemini API key" autocomplete="off" />
+              <a class="ai-key-link" href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener">Get a free key</a>
+            </div>
+            <button id="aiBtn" class="btn-ai" type="button">
+              <span class="btn-ai-label"><i class="lucide lucide-wand-2" aria-hidden="true"></i> Improve with AI</span>
+              <span class="btn-ai-spinner" aria-hidden="true"></span>
+            </button>
+            <p id="aiStatus" class="ai-status" aria-live="polite"></p>
+            <ul id="aiSuggestionsList" class="ai-suggestions-list"></ul>
           </div>
-
-          <!-- Section Analysis -->
-          <div class="breakdown-card sections">
-            <h3><i class="lucide lucide-clipboard-list"></i> Section Analysis</h3>
-            <div id="sectionAnalysis" class="section-list"></div>
-          </div>
-
-          <!-- Suggestions -->
-          <div class="breakdown-card suggestions">
-            <h3><i class="lucide lucide-lightbulb"></i> Improvement Tips</h3>
-            <ul id="suggestionsList" class="suggestions-list"></ul>
-          </div>
-
-        </div>
-
-        <!-- Category Scores -->
-        <div class="category-section">
-          <h3><i class="lucide lucide-bar-chart-3"></i> Category-wise Score</h3>
-          <div id="categoryBars" class="category-bars"></div>
-        </div>
-
+        </section>
       </div>
+    </main>
 
-    </div>
-  </main>
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2026 ResumeIQ. Built to help you land your dream job.</p>
+      </div>
+    </footer>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2026 ResumeIQ. Built to help you land your dream job.</p>
-    </div>
-  </footer>
-
-  <script src="script.js"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/mammoth@1.6.0/mammoth.browser.min.js"></script>
+    <script type="module">
+      import * as pdfjsLib from "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/build/pdf.min.mjs";
+      pdfjsLib.GlobalWorkerOptions.workerSrc =
+        "https://cdn.jsdelivr.net/npm/pdfjs-dist@4.0.379/build/pdf.worker.min.mjs";
+      window.pdfjsLib = pdfjsLib;
+    </script>
+    <script src="script.js" defer></script>
+    <script src="gemini.js" defer></script>
+  </body>
 </html>
