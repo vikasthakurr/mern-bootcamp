@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JobConnect — Connecting Employers &amp; Candidates</title>
+    <meta
+      name="description"
+      content="JobConnect is a platform that connects employers with top candidates. Post jobs, discover talent, and find your next role."
+    />
+
+    <!-- Bootstrap 5 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ===================== Navbar ===================== -->
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-3"
+    >
+      <div class="container">
+        <a
+          class="navbar-brand d-flex align-items-center gap-2 fw-bold"
+          href="#home"
+        >
+          <span class="brand-logo"><i class="bi bi-briefcase-fill"></i></span>
+          <span>Job<span class="text-primary">Connect</span></span>
+        </a>
+
+        <button
+          class="navbar-toggler border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#mainNav"
+          aria-controls="mainNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNav">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0 gap-lg-1">
+            <li class="nav-item">
+              <a class="nav-link active" href="#home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#jobs">Find Jobs</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#employers">For Employers</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#how">How It Works</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#testimonials">Reviews</a>
+            </li>
+          </ul>
+          <div class="d-flex gap-2 flex-column flex-lg-row">
+            <a href="#" class="btn btn-outline-primary px-3">Sign In</a>
+            <a href="#" class="btn btn-primary px-3">Register</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ===================== Hero ===================== -->
+    <header id="home" class="hero">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6 text-center text-lg-start">
+            <span class="badge rounded-pill badge-soft mb-3">
+              <i class="bi bi-stars me-1"></i> Over 50,000 jobs posted this
+              month
+            </span>
+            <h1 class="display-4 fw-800 lh-sm mb-3">
+              Where <span class="text-primary">talent</span> meets
+              <span class="text-primary">opportunity</span>
+            </h1>
+            <p class="lead text-secondary mb-4">
+              JobConnect brings employers and candidates together on one
+              platform. Discover your next role or hire the people who will
+              build your future.
+            </p>
+
+            <!-- Search bar -->
+            <form
+              class="search-card shadow-sm p-2 p-sm-2 mb-4"
+              role="search"
+              onsubmit="return false;"
+            >
+              <div class="row g-2 align-items-center">
+                <div class="col-12 col-sm">
+                  <div class="input-group input-group-flush">
+                    <span class="input-group-text bg-transparent border-0"
+                      ><i class="bi bi-search"></i
+                    ></span>
+                    <input
+                      type="text"
+                      class="form-control border-0"
+                      placeholder="Job title or keyword"
+                      aria-label="Job title or keyword"
+                    />
+                  </div>
+                </div>
+                <div class="col-12 col-sm border-start-sm">
+                  <div class="input-group input-group-flush">
+                    <span class="input-group-text bg-transparent border-0"
+                      ><i class="bi bi-geo-alt"></i
+                    ></span>
+                    <input
+                      type="text"
+                      class="form-control border-0"
+                      placeholder="Location"
+                      aria-label="Location"
+                    />
+                  </div>
+                </div>
+                <div class="col-12 col-sm-auto">
+                  <button type="submit" class="btn btn-primary w-100 px-4">
+                    Search
+                  </button>
+                </div>
+              </div>
+            </form>
+
+            <p class="small text-secondary mb-0">
+              Popular:
+              <a href="#jobs" class="link-tag">Remote</a>
+              <a href="#jobs" class="link-tag">Design</a>
+              <a href="#jobs" class="link-tag">Engineering</a>
+              <a href="#jobs" class="link-tag">Marketing</a>
+            </p>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="hero-visual position-relative">
+              <img
+                src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80"
+                alt="A team collaborating in a modern office"
+                class="img-fluid rounded-4 shadow-lg hero-img"
+              />
+              <div class="floating-card card-stat shadow">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="stat-icon bg-success-subtle text-success"
+                    ><i class="bi bi-graph-up-arrow"></i
+                  ></span>
+                  <div>
+                    <div class="fw-bold">12,400+</div>
+                    <div class="small text-secondary">Hires this year</div>
+                  </div>
+                </div>
+              </div>
+              <div class="floating-card card-user shadow">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="stat-icon bg-primary-subtle text-primary"
+                    ><i class="bi bi-people-fill"></i
+                  ></span>
+                  <div>
+                    <div class="fw-bold">2M+</div>
+                    <div class="small text-secondary">Active candidates</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===================== Trusted by / Stats ===================== -->
+    <section class="py-5 bg-white border-bottom">
+      <div class="container">
+        <div class="row text-center g-4">
+          <div class="col-6 col-md-3">
+            <div class="h2 fw-bold text-primary mb-0">50K+</div>
+            <div class="text-secondary small">Open positions</div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="h2 fw-bold text-primary mb-0">25K+</div>
+            <div class="text-secondary small">Companies hiring</div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="h2 fw-bold text-primary mb-0">2M+</div>
+            <div class="text-secondary small">Candidates</div>
+          </div>
+          <div class="col-6 col-md-3">
+            <div class="h2 fw-bold text-primary mb-0">98%</div>
+            <div class="text-secondary small">Satisfaction</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== How It Works ===================== -->
+    <section id="how" class="py-5 py-lg-6">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="section-eyebrow">Simple Process</span>
+          <h2 class="fw-bold mt-2">How JobConnect works</h2>
+          <p class="text-secondary mx-auto" style="max-width: 560px">
+            Whether you are hiring or job hunting, getting started takes just
+            three steps.
+          </p>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="step-card h-100 p-4 rounded-4 bg-white shadow-sm">
+              <div class="step-number">1</div>
+              <h5 class="fw-bold mt-3">Create your profile</h5>
+              <p class="text-secondary mb-0">
+                Build a standout candidate profile or company page in minutes
+                with our guided setup.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="step-card h-100 p-4 rounded-4 bg-white shadow-sm">
+              <div class="step-number">2</div>
+              <h5 class="fw-bold mt-3">Match &amp; connect</h5>
+              <p class="text-secondary mb-0">
+                Our smart matching surfaces the right jobs for candidates and
+                the right talent for employers.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="step-card h-100 p-4 rounded-4 bg-white shadow-sm">
+              <div class="step-number">3</div>
+              <h5 class="fw-bold mt-3">Hire or get hired</h5>
+              <p class="text-secondary mb-0">
+                Message, interview, and close the deal — all from one
+                streamlined dashboard.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Featured Jobs ===================== -->
+    <section id="jobs" class="py-5 py-lg-6 bg-light-subtle">
+      <div class="container">
+        <div
+          class="d-flex flex-column flex-md-row justify-content-between align-items-md-end mb-5 gap-3"
+        >
+          <div>
+            <span class="section-eyebrow">For Candidates</span>
+            <h2 class="fw-bold mt-2 mb-0">Featured job openings</h2>
+          </div>
+          <a href="#" class="btn btn-outline-primary"
+            >Browse all jobs <i class="bi bi-arrow-right ms-1"></i
+          ></a>
+        </div>
+
+        <div class="row g-4" id="jobGrid">
+          <!-- Job card 1 -->
+          <div class="col-md-6 col-lg-4">
+            <article class="job-card h-100 p-4 rounded-4 bg-white shadow-sm">
+              <div
+                class="d-flex justify-content-between align-items-start mb-3"
+              >
+                <span class="company-logo bg-primary-subtle text-primary"
+                  >Fs</span
+                >
+                <span class="badge badge-type">Full-time</span>
+              </div>
+              <h5 class="fw-bold mb-1">Senior Frontend Engineer</h5>
+              <p class="text-secondary small mb-3">Fusion Studio · Remote</p>
+              <div class="d-flex flex-wrap gap-2 mb-3">
+                <span class="tag"
+                  ><i class="bi bi-cash-coin me-1"></i>$120k–$150k</span
+                >
+                <span class="tag"
+                  ><i class="bi bi-geo-alt me-1"></i>Remote</span
+                >
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="small text-secondary">2 days ago</span>
+                <a href="#" class="btn btn-sm btn-primary">Apply</a>
+              </div>
+            </article>
+          </div>
+
+          <!-- Job card 2 -->
+          <div class="col-md-6 col-lg-4">
+            <article class="job-card h-100 p-4 rounded-4 bg-white shadow-sm">
+              <div
+                class="d-flex justify-content-between align-items-start mb-3"
+              >
+                <span class="company-logo bg-success-subtle text-success"
+                  >Nv</span
+                >
+                <span class="badge badge-type">Contract</span>
+              </div>
+              <h5 class="fw-bold mb-1">Product Designer</h5>
+              <p class="text-secondary small mb-3">Nova Labs · New York, NY</p>
+              <div class="d-flex flex-wrap gap-2 mb-3">
+                <span class="tag"
+                  ><i class="bi bi-cash-coin me-1"></i>$90k–$110k</span
+                >
+                <span class="tag"
+                  ><i class="bi bi-geo-alt me-1"></i>Hybrid</span
+                >
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="small text-secondary">5 days ago</span>
+                <a href="#" class="btn btn-sm btn-primary">Apply</a>
+              </div>
+            </article>
+          </div>
+
+          <!-- Job card 3 -->
+          <div class="col-md-6 col-lg-4">
+            <article class="job-card h-100 p-4 rounded-4 bg-white shadow-sm">
+              <div
+                class="d-flex justify-content-between align-items-start mb-3"
+              >
+                <span class="company-logo bg-warning-subtle text-warning"
+                  >Bz</span
+                >
+                <span class="badge badge-type">Full-time</span>
+              </div>
+              <h5 class="fw-bold mb-1">Backend Developer (Node)</h5>
+              <p class="text-secondary small mb-3">
+                Bytez Inc · San Francisco, CA
+              </p>
+              <div class="d-flex flex-wrap gap-2 mb-3">
+                <span class="tag"
+                  ><i class="bi bi-cash-coin me-1"></i>$130k–$160k</span
+                >
+                <span class="tag"
+                  ><i class="bi bi-geo-alt me-1"></i>On-site</span
+                >
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="small text-secondary">1 week ago</span>
+                <a href="#" class="btn btn-sm btn-primary">Apply</a>
+              </div>
+            </article>
+          </div>
+
+          <!-- Job card 4 -->
+          <div class="col-md-6 col-lg-4">
+            <article class="job-card h-100 p-4 rounded-4 bg-white shadow-sm">
+              <div
+                class="d-flex justify-content-between align-items-start mb-3"
+              >
+                <span class="company-logo bg-danger-subtle text-danger"
+                  >Mk</span
+                >
+                <span class="badge badge-type">Part-time</span>
+              </div>
+              <h5 class="fw-bold mb-1">Marketing Manager</h5>
+              <p class="text-secondary small mb-3">
+                Marko &amp; Co · Austin, TX
+              </p>
+              <div class="d-flex flex-wrap gap-2 mb-3">
+                <span class="tag"
+                  ><i class="bi bi-cash-coin me-1"></i>$70k–$85k</span
+                >
+                <span class="tag"
+                  ><i class="bi bi-geo-alt me-1"></i>Hybrid</span
+                >
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="small text-secondary">3 days ago</span>
+                <a href="#" class="btn btn-sm btn-primary">Apply</a>
+              </div>
+            </article>
+          </div>
+
+          <!-- Job card 5 -->
+          <div class="col-md-6 col-lg-4">
+            <article class="job-card h-100 p-4 rounded-4 bg-white shadow-sm">
+              <div
+                class="d-flex justify-content-between align-items-start mb-3"
+              >
+                <span class="company-logo bg-info-subtle text-info">Dp</span>
+                <span class="badge badge-type">Full-time</span>
+              </div>
+              <h5 class="fw-bold mb-1">DevOps Engineer</h5>
+              <p class="text-secondary small mb-3">Deploya · Remote</p>
+              <div class="d-flex flex-wrap gap-2 mb-3">
+                <span class="tag"
+                  ><i class="bi bi-cash-coin me-1"></i>$125k–$155k</span
+                >
+                <span class="tag"
+                  ><i class="bi bi-geo-alt me-1"></i>Remote</span
+                >
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="small text-secondary">Today</span>
+                <a href="#" class="btn btn-sm btn-primary">Apply</a>
+              </div>
+            </article>
+          </div>
+
+          <!-- Job card 6 -->
+          <div class="col-md-6 col-lg-4">
+            <article class="job-card h-100 p-4 rounded-4 bg-white shadow-sm">
+              <div
+                class="d-flex justify-content-between align-items-start mb-3"
+              >
+                <span class="company-logo bg-secondary-subtle text-secondary"
+                  >Dt</span
+                >
+                <span class="badge badge-type">Full-time</span>
+              </div>
+              <h5 class="fw-bold mb-1">Data Analyst</h5>
+              <p class="text-secondary small mb-3">DataTree · Chicago, IL</p>
+              <div class="d-flex flex-wrap gap-2 mb-3">
+                <span class="tag"
+                  ><i class="bi bi-cash-coin me-1"></i>$80k–$100k</span
+                >
+                <span class="tag"
+                  ><i class="bi bi-geo-alt me-1"></i>On-site</span
+                >
+              </div>
+              <div class="d-flex justify-content-between align-items-center">
+                <span class="small text-secondary">4 days ago</span>
+                <a href="#" class="btn btn-sm btn-primary">Apply</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== For Employers ===================== -->
+    <section id="employers" class="py-5 py-lg-6">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6 order-2 order-lg-1">
+            <span class="section-eyebrow">For Employers</span>
+            <h2 class="fw-bold mt-2 mb-3">Hire the right people, faster</h2>
+            <p class="text-secondary mb-4">
+              Reach millions of qualified candidates, manage applications in one
+              place, and let smart matching do the heavy lifting.
+            </p>
+
+            <ul class="list-unstyled d-grid gap-3 mb-4">
+              <li class="d-flex gap-3">
+                <span class="check-icon"><i class="bi bi-check-lg"></i></span>
+                <div>
+                  <strong>Post jobs in minutes</strong>
+                  <div class="text-secondary small">
+                    Templates and AI suggestions help you write better listings.
+                  </div>
+                </div>
+              </li>
+              <li class="d-flex gap-3">
+                <span class="check-icon"><i class="bi bi-check-lg"></i></span>
+                <div>
+                  <strong>Smart candidate matching</strong>
+                  <div class="text-secondary small">
+                    Get a ranked shortlist of candidates that fit your role.
+                  </div>
+                </div>
+              </li>
+              <li class="d-flex gap-3">
+                <span class="check-icon"><i class="bi bi-check-lg"></i></span>
+                <div>
+                  <strong>Applicant tracking built in</strong>
+                  <div class="text-secondary small">
+                    Move candidates through your pipeline with ease.
+                  </div>
+                </div>
+              </li>
+            </ul>
+
+            <a href="#" class="btn btn-primary btn-lg px-4"
+              >Post a job <i class="bi bi-arrow-right ms-1"></i
+            ></a>
+          </div>
+
+          <div class="col-lg-6 order-1 order-lg-2">
+            <img
+              src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=900&q=80"
+              alt="Recruiter reviewing candidate applications"
+              class="img-fluid rounded-4 shadow-lg"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Testimonials ===================== -->
+    <section id="testimonials" class="py-5 py-lg-6 bg-light-subtle">
+      <div class="container">
+        <div class="text-center mb-5">
+          <span class="section-eyebrow">Loved by thousands</span>
+          <h2 class="fw-bold mt-2">What our community says</h2>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div
+              class="testimonial-card h-100 p-4 rounded-4 bg-white shadow-sm"
+            >
+              <div class="text-warning mb-2">
+                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+                ><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+                ><i class="bi bi-star-fill"></i>
+              </div>
+              <p class="mb-4">
+                "I found my dream remote job within two weeks. The matching was
+                spot on and the process was effortless."
+              </p>
+              <div class="d-flex align-items-center gap-3">
+                <img
+                  src="https://i.pravatar.cc/80?img=5"
+                  alt="Amelia Carter"
+                  class="rounded-circle"
+                  width="48"
+                  height="48"
+                />
+                <div>
+                  <div class="fw-semibold">Amelia Carter</div>
+                  <div class="small text-secondary">Frontend Engineer</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div
+              class="testimonial-card h-100 p-4 rounded-4 bg-white shadow-sm"
+            >
+              <div class="text-warning mb-2">
+                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+                ><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+                ><i class="bi bi-star-fill"></i>
+              </div>
+              <p class="mb-4">
+                "As a hiring manager, JobConnect cut our time-to-hire in half.
+                The shortlist quality is excellent."
+              </p>
+              <div class="d-flex align-items-center gap-3">
+                <img
+                  src="https://i.pravatar.cc/80?img=12"
+                  alt="Daniel Okafor"
+                  class="rounded-circle"
+                  width="48"
+                  height="48"
+                />
+                <div>
+                  <div class="fw-semibold">Daniel Okafor</div>
+                  <div class="small text-secondary">
+                    Head of Talent, Nova Labs
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div
+              class="testimonial-card h-100 p-4 rounded-4 bg-white shadow-sm"
+            >
+              <div class="text-warning mb-2">
+                <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+                ><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i
+                ><i class="bi bi-star-half"></i>
+              </div>
+              <p class="mb-4">
+                "Clean interface, great candidates, and support that actually
+                helps. Highly recommend for small teams."
+              </p>
+              <div class="d-flex align-items-center gap-3">
+                <img
+                  src="https://i.pravatar.cc/80?img=32"
+                  alt="Sofia Rossi"
+                  class="rounded-circle"
+                  width="48"
+                  height="48"
+                />
+                <div>
+                  <div class="fw-semibold">Sofia Rossi</div>
+                  <div class="small text-secondary">
+                    Founder, Marko &amp; Co
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CTA ===================== -->
+    <section class="py-5 py-lg-6">
+      <div class="container">
+        <div
+          class="cta-panel text-center text-white rounded-4 p-5 p-lg-6 shadow-lg"
+        >
+          <h2 class="fw-bold mb-3">Ready to make your next move?</h2>
+          <p class="lead mb-4 opacity-75">
+            Join JobConnect today — it's free for candidates and takes less than
+            two minutes to get started.
+          </p>
+          <div
+            class="d-flex flex-column flex-sm-row justify-content-center gap-3"
+          >
+            <a href="#jobs" class="btn btn-light btn-lg px-4 fw-semibold"
+              >Find a job</a
+            >
+            <a
+              href="#employers"
+              class="btn btn-outline-light btn-lg px-4 fw-semibold"
+              >Hire talent</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Footer ===================== -->
+    <footer class="footer pt-5 pb-4">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <a
+              class="navbar-brand d-flex align-items-center gap-2 fw-bold text-white mb-3"
+              href="#home"
+            >
+              <span class="brand-logo"
+                ><i class="bi bi-briefcase-fill"></i
+              ></span>
+              <span>Job<span class="text-primary">Connect</span></span>
+            </a>
+            <p class="text-white-50">
+              The platform where employers and candidates connect, match, and
+              grow together.
+            </p>
+            <div class="d-flex gap-2">
+              <a href="#" class="social-link" aria-label="Twitter"
+                ><i class="bi bi-twitter-x"></i
+              ></a>
+              <a href="#" class="social-link" aria-label="LinkedIn"
+                ><i class="bi bi-linkedin"></i
+              ></a>
+              <a href="#" class="social-link" aria-label="Facebook"
+                ><i class="bi bi-facebook"></i
+              ></a>
+              <a href="#" class="social-link" aria-label="Instagram"
+                ><i class="bi bi-instagram"></i
+              ></a>
+            </div>
+          </div>
+
+          <div class="col-6 col-lg-2">
+            <h6 class="text-white fw-bold mb-3">Candidates</h6>
+            <ul class="list-unstyled footer-links">
+              <li><a href="#jobs">Browse jobs</a></li>
+              <li><a href="#">Companies</a></li>
+              <li><a href="#">Career advice</a></li>
+              <li><a href="#">Salary guide</a></li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-lg-2">
+            <h6 class="text-white fw-bold mb-3">Employers</h6>
+            <ul class="list-unstyled footer-links">
+              <li><a href="#employers">Post a job</a></li>
+              <li><a href="#">Pricing</a></li>
+              <li><a href="#">Find candidates</a></li>
+              <li><a href="#">Resources</a></li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-lg-2">
+            <h6 class="text-white fw-bold mb-3">Company</h6>
+            <ul class="list-unstyled footer-links">
+              <li><a href="#">About us</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </div>
+
+          <div class="col-6 col-lg-2">
+            <h6 class="text-white fw-bold mb-3">Legal</h6>
+            <ul class="list-unstyled footer-links">
+              <li><a href="#">Privacy</a></li>
+              <li><a href="#">Terms</a></li>
+              <li><a href="#">Cookies</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <hr class="border-secondary my-4" />
+        <div
+          class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2"
+        >
+          <p class="text-white-50 small mb-0">
+            © 2026 JobConnect. All rights reserved.
+          </p>
+          <p class="text-white-50 small mb-0">
+            Built with HTML, CSS &amp; Bootstrap
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS bundle -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
