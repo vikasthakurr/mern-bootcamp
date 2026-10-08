@@ -687,3 +687,18 @@ setupFileUpload("resumeFile", "resumeInput", "resumeFileStatus", "resumeError");
 setupFileUpload("jobFile", "jobInput", "jobFileStatus", "jobError");
 initThemeToggle();
 loadInputs();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
