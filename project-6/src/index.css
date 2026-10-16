@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Offset anchor scroll so the sticky navbar doesn't cover the target. */
+#catalog {
+  scroll-margin-top: 80px;
+}
