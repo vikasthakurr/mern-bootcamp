@@ -1,25 +1,35 @@
-// subject.js — the code under test for the example specs.
+// subject.js — the small functions we want to test.
 
-export const add = (a, b) => a + b;
-export const multiply = (a, b) => a * b;
+// Simple functions.
+export function add(a, b) {
+  return a + b;
+}
 
-export const scaleBy = (factor) => (n) => n * factor;
+export function sum(numbers) {
+  return numbers.reduce((total, n) => total + n, 0);
+}
 
-export const pipe = (...fns) => (input) => fns.reduce((acc, fn) => fn(acc), input);
+export function evens(numbers) {
+  return numbers.filter((n) => n % 2 === 0);
+}
 
-export const sum = (nums) => nums.reduce((acc, n) => acc + n, 0);
-export const evens = (nums) => nums.filter((n) => n % 2 === 0);
+// scaleBy returns a new function that remembers "factor" — a closure.
+export function scaleBy(factor) {
+  return function (n) {
+    return n * factor;
+  };
+}
 
-// Closure-based counter: `count` is private to the returned methods.
+// makeCounter keeps "count" private. Only the returned methods can change it — a closure.
 export function makeCounter(start = 0) {
   let count = start;
   return {
     increment() {
-      count += 1;
+      count = count + 1;
       return count;
     },
     decrement() {
-      count -= 1;
+      count = count - 1;
       return count;
     },
     value() {
@@ -28,7 +38,10 @@ export function makeCounter(start = 0) {
   };
 }
 
+// divide throws when you divide by zero — used to show toThrow().
 export function divide(a, b) {
-  if (b === 0) throw new Error("cannot divide by zero");
+  if (b === 0) {
+    throw new Error("cannot divide by zero");
+  }
   return a / b;
 }
