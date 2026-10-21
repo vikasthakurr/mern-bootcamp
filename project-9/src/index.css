@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-slate-100 text-slate-900 font-sans antialiased;
+}
+
+/* A soft custom scrollbar for the board area (nice industry touch). */
+.board-scroll::-webkit-scrollbar {
+  height: 10px;
+}
+.board-scroll::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-slate-300;
+}
+.board-scroll::-webkit-scrollbar-thumb:hover {
+  @apply bg-slate-400;
+}

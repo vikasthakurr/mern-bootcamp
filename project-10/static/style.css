@@ -1,0 +1,61 @@
+/* Simple styling for the generated site. Copied as-is into public/. */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.6;
+  color: #1e293b;
+  background: #f8fafc;
+}
+
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  background: #4f46e5;
+  color: #fff;
+}
+
+.site-header .brand {
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+.site-header nav a {
+  color: #e0e7ff;
+  text-decoration: none;
+  margin-left: 1.25rem;
+}
+
+.site-header nav a:hover {
+  color: #fff;
+}
+
+.content {
+  max-width: 720px;
+  margin: 2.5rem auto;
+  padding: 0 1.5rem;
+}
+
+.content h1 {
+  font-size: 2rem;
+}
+
+.content a {
+  color: #4f46e5;
+}
+
+.site-footer {
+  max-width: 720px;
+  margin: 3rem auto 2rem;
+  padding: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+  color: #64748b;
+  font-size: 0.9rem;
+}

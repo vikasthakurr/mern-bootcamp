@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-ink-900 font-sans antialiased;
+}
+
+/* Clamp long text to a number of lines (used on job descriptions). */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* A soft dotted grid used as a decorative hero background. */
+.hero-grid {
+  background-image: radial-gradient(
+    rgba(10, 101, 204, 0.12) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+}

@@ -1,0 +1,17 @@
+{
+  "name": "forgesite",
+  "version": "1.0.0",
+  "description": "ForgeSite - A simple static site generator built to teach Node.js fundamentals (fs, path, CLI, modules, Express preview).",
+  "type": "module",
+  "bin": {
+    "forge": "./forge.js"
+  },
+  "scripts": {
+    "build": "node forge.js build",
+    "serve": "node forge.js serve",
+    "clean": "node forge.js clean"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

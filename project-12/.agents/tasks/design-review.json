@@ -1,0 +1,41 @@
+{
+  "verdict": "CHANGES_REQUESTED",
+  "reviewDoc": "/Users/gfg19722-laptop/Desktop/mern-cohort-projects/project-12/.agents/tasks/design-review.md",
+  "findings": [
+    {
+      "id": 1,
+      "severity": "MEDIUM",
+      "title": "Job `client` field has two serialized shapes (ObjectId string on create/update vs populated {id,name} on list/detail); frontend keys off the populated shape",
+      "location": "design.md jobController.createJob/updateJob (no populate) vs getJob/listJobs (populate('client','name')); frontend JobDetailPage uses job.client.id",
+      "fix": "Re-populate client before responding on create and update (await job.populate('client','name')), and document in the API contract that job.client is ALWAYS the { id, name } object on every job-returning endpoint. Align the frontend to that single shape."
+    },
+    {
+      "id": 2,
+      "severity": "MEDIUM",
+      "title": "Ownership check job.client.toString() is correct only while the ref is unpopulated; a later populate would silently break it",
+      "location": "design.md jobController.updateJob/deleteJob and proposalController.listProposalsForJob",
+      "fix": "Specify a populate-independent comparison, e.g. String(job.client._id || job.client) !== req.user.id, OR state as an explicit invariant that ownership-checking controllers must fetch WITHOUT populate. Document the rule once."
+    },
+    {
+      "id": 3,
+      "severity": "MEDIUM",
+      "title": "server/.env is gitignored and in-code mongoUri default stays ''; a fresh checkout silently runs in-memory instead of MongoDB",
+      "location": "design.md Env contract; config/env.js (mongoUri default ''); config/db.js (empty MONGO_URI -> warn + null)",
+      "fix": "Either set the in-code default to 'mongodb://127.0.0.1:27017/talentbridge' so a bare checkout connects with no .env, or add an explicit 'copy .env.example to .env before dev/seed' setup step and state the in-memory path is only a safety net. State the choice."
+    },
+    {
+      "id": 4,
+      "severity": "NIT",
+      "title": "Clarify that createToken uses the Mongoose .id virtual, not a serialized toJSON result",
+      "location": "design.md authController.register (createToken(user) using user.id)",
+      "fix": "Add a one-line note: user.id is the Mongoose .id virtual (always present on a saved doc); do not call createToken on a .toJSON() result."
+    },
+    {
+      "id": 5,
+      "severity": "NIT",
+      "title": "Frontend base URL hardcoded to localhost:4000 while CORS also allows 127.0.0.1:5173 origin",
+      "location": "design.md frontend client.js base URL; app.js CORS allow-list",
+      "fix": "Document that the app should be opened at http://localhost:5173 to match the hardcoded backend localhost:4000, or comment the base-URL constant to note the host-form expectation shared with CORS."
+    }
+  ]
+}
