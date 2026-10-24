@@ -1,328 +1,457 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="PlateCraft - Fine dining restaurant serving artfull dishes crafted from the finest local and international ingredients. Reserve your table today.">
-  <title>PlateCraft - Fine Dining Restaurant</title>
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TripMate – Travel Beyond Boundaries</title>
+    <link rel="icon" type="image/png" href="images/favicon-32x32.png">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-
-  <!-- Skip link for accessibility -->
-  <a href="#home" class="skip-link">Skip to content</a>
-
-  <!-- Header / Navigation -->
-  <header class="header">
+    <!--header-->
+<header class="header">
     <div class="container">
-      <a href="#home" class="logo">Plate<span>Craft</span></a>
-      <nav class="nav" aria-label="Main navigation">
+        <!--logo-->
+        <a href="#home" class="logo">Travel<span>Mate</span> </a>
+        <!--navigation menu-->
+    <nav class="nav-menu" aria-label="main-navigation">
         <a href="#home">Home</a>
         <a href="#about">About</a>
-        <a href="#menu">Menu</a>
-        <a href="#specials">Specials</a>
-        <a href="#gallery">Gallery</a>
-        <a href="#contact" class="nav-cta">Reserve</a>
-      </nav>
+        <a href="#tours">Tour</a>
+        <a href="#styles">styles</a>
+        <a href="#contact">Contact</a>
+        <!--Sign Up Button-->
+        <a href="#signup-modal" class="btn-signup">Sign Up</a>
+    </nav>
     </div>
-  </header>
-
-  <!-- Hero Section -->
-  <section id="home" class="hero">
-    <div class="hero-overlay"></div>
+</header>
+<!--home/hero section banner area-->
+<main>
+    <section id="home" class="hero">
     <div class="hero-content">
-      <p class="hero-eyebrow">Est. 2018 &middot; Fine Dining</p>
-      <h1>A Taste of<br><em>Artistry</em></h1>
-      <p class="hero-sub">Where every dish is a masterpiece, crafted with passion and precision in the heart of the city.</p>
-      <div class="hero-actions">
-        <a href="#menu" class="btn">Explore Our Menu</a>
-        <a href="#contact" class="btn btn-ghost">Reserve a Table</a>
-      </div>
+        <h1 class="hero-title"><em>Say yes</em><br>to your DESTINATION</h1>
+        <p class="hero-sub">
+            Pack your bags and start your journey with us. Explore beautiful places, plan memorable vacations, and experience the world beyond boundaries.
+        </p>
+        <div class="hero-actions">
+            <a href="#tours" class="btn btn-primary">Explore More</a>
+            <a href="#booking" class="btn btn-ghost">Book now</a>
+        </div>
     </div>
+    <!-- Scroll Down Icon (Perfectly Centered) -->
     <div class="hero-scroll" aria-hidden="true">
-      <span></span>
+        <span></span>
     </div>
-  </section>
+</section>
+    <!--About section-->
+    <section id="about" class="about-section">
+        <div>
+            <h2>About Us</h2>
+            <p>At TripMate, We believe every journey is an opportunity to discover something new. Founded in 2019 by Ethan Carter and Ryan Mitchell, JTravels began with a shared passion for discovering new places and making travel easier for everyone. Based in California, USA, Ethan and Ryan often found themselves spending hours searching different websites to compare destinations, accommodations, activities, and travel options. They realized that planning a vacation could be much more complicated than the actual journey. </p>
+            <h3>Our Origin</h3>
+            <p>In 2020, they decided to turn their idea into reality and started building a simple travel platform that would bring useful travel information together in one place. Over the years, their small idea grew into JTravels, a platform created to inspire travelers to discover new destinations, plan memorable vacations, and experience the world with confidence.Today, JTravels continues to follow the vision that started it all — Travel Beyond Boundaries. 🌎✈️</p>
+        </div>
+    </section>
+    <!--Tours Section-->
+    <section id="tours" class="tours-section">
+        <div class="container">
+            <p class="eyebrow">Explore The World</p>
+            <h2 class="section-title">Best Adventures Tour Packages</h2>
 
-  <!-- About Section -->
-  <section id="about" class="about">
-    <div class="container">
-      <div class="about-grid">
-        <div class="about-text">
-          <p class="eyebrow">Our Story</p>
-          <h2 class="section-title left">Crafted with intention,<br>served with soul</h2>
-          <p>At PlateCraft, we believe that dining is an art form. Founded in 2018, our restaurant brings together the finest ingredients from local farms and international sources to create dishes that delight all your senses.</p>
-          <p>Our team of passionate chefs combines traditional techniques with modern creativity, crafting each plate as a unique work of culinary art. Every visit to PlateCraft is an unforgettable experience.</p>
-          <a href="#menu" class="text-link">Discover the menu &rarr;</a>
+            <div class="tours-grid">
+                <!-- Column 1: Egypt Tour -->
+                <div class="tour-col">
+                    <div class="tour-card">
+                        <div class="tour-image">
+                        <img src="images/egypt.jpg" width="100%" alt="Egypt Tour">
+                        </div>
+                    <h3>Egypt</h3>
+                        <p class="tour-desc">Explore the timeless wonders of ancient pyramids, historic tombs, and vibrant local bazaars in the land of Pharaohs.In Egypt, where history unfolds before you. Wander at the Pyramids of Giza, the Sphinx, and the Valley of the Kings.</p>
+                        <span class="price">US$525</span><br><a href="#booking" class="btn-book">Book Now</a>
+                    </div>
+                </div>
+        
+            <!-- Column 2: Africa Tour -->
+            <div class="tour-col">
+                <div class="tour-card">
+        
+                    <div class="tour-image">
+                        <img src="images/africa.jpg" width="100%" alt="Africa Tour">
+                    </div>
+                    <h3>Africa Tours</h3>
+                    <p>The true heartbeat of Africa entices like nowhere else. Head off on a once-in-a-lifetime safari in Tanzania and sample fine wines in South Africa.</p>
+                    <span class="price">US$675</span><br><a href="#booking" class="btn-book">Book Now</a>  
+                </div>
+            </div>
+            <!-- Column 3: Europe Tour -->
+            <div class="tour-col">
+                <div class="tour-card">
+                    <div class="tour-image">
+                        <img src="images/europe.jpg" width="100%" alt="Europe Tour">
+                    </div>
+                    <h3>Europe Tours</h3>
+                    <p>Visit seven countries on this adventure-filled Balkan trip, where you’ll venture deep into the Carpathian Mountains, walk in the mythical footsteps of Count Dracula at Bran Castle in Transylvania and revel in the beauty, history and traditions of the Balkan nations.</p>
+                    <span class="price">US$2,481</span><br><a href="#booking" class="btn-book">Book Now</a>  
+                </div>
+            </div>
+            <!-- Column 4: Asia Tour -->
+            <div class="tour-col">
+                <div class="tour-card">
+                    <div class="tour-image">
+                        <img src="images/asia.jpg" width="100%" alt="Asia Tour">
+                    </div>
+                    <h3>Asia Tours</h3>
+                    <p>Embark on an unforgettable 79-day grand journey across India, Bhutan, Nepal and Sri Lanka, blending heritage, spirituality, wildlife and breathtaking landscapes.</p>
+                    <span class="price">US$3,771</span><br><a href="#booking" class="btn-book">Book Now</a>  
+                </div>
+            </div>
+        <!-- Column 5: India Tour -->
+            <div class="tour-col">
+                <div class="tour-card">
+                    <div class="tour-image">
+                        <img src="images/india.jpg" width="100%" alt="India Tour">
+                    </div>
+                    <h3>India Tours</h3>
+                    <p>India will stay with you forever. Watch as the sunrise bathes the white marble of the Taj Mahal in gold. Visit the grand Amber Fort and the Palace of Winds in the pink-hued city of Jaipur and follow wild tigers through the jungles of Ranthambore.</p>
+                    <span class="price">US$1,250</span><br><a href="#booking" class="btn-book">Book Now</a>  
+                </div>
+            </div>
+        <!-- Column 6: Bosania Tour -->
+            <div class="tour-col">
+                <div class="tour-card">
+                    <div class="tour-image">
+                        <img src="images/bosania.jpg" width="100%" alt="Bosania Tour">
+                    </div>
+                    <h3>Bosnia Tours</h3>
+                    <p>Have you watched someone dive off a bridge 24 meters high? Mostar's bridge divers do it daily in summer, and the Old Bridge itself stands beautifully rebuilt. Bosnia tells complex stories through its cities, Sarajevo’s Old Town and museums provide context, Kravica Waterfalls create perfect swimming spots, and Cincar Mountain sometimes reveals wild horses.</p>
+                    <span class="price">US$1,372</span><br><a href="#booking" class="btn-book">Book Now</a>  
+                </div>
+            </div>
         </div>
-        <div class="about-stats">
-          <div class="stat">
-            <h3>8+</h3>
-            <p>Years of Excellence</p>
-          </div>
-          <div class="stat">
-            <h3>50+</h3>
-            <p>Signature Dishes</p>
-          </div>
-          <div class="stat">
-            <h3>15</h3>
-            <p>Expert Chefs</p>
-          </div>
-          <div class="stat">
-            <h3>4.9</h3>
-            <p>Guest Rating</p>
-          </div>
+    </section>
+    <!--styles section-->
+    <section id="styles" class="styles-scetion">
+        <div class="container">
+            <div class="container">
+                <div class="styles-container">
+                <h2>Best Adventures Styles</h2>
+                <p>Go wild, go slow, go solo, or go together. Adventure has no one way. Choose your journey, follow your curiosity, and fill your passport with unforgettable experiences.</p>
+            </div>
+        <!--styles Grid/list-->
+        <div class="styles-grid">
+            <div class="style-card">
+                <img src="images/adventures.jpg" width="100%" alt="Adventure">
+                <div class="style-card-body">
+                    <h3>Adventure & Adrenaline Tours & Trips</h3>
+                    <p>Travelers who love action and excitement. Enjoy rafting, zip-lining, safaris, hiking, surfing, and more—all packed into one unforgettable adventure.</p>
+                </div>
+            </div>
+             <div class="style-card">
+                <img src="images/cycle.jpg" width="100%" alt="Cycling">
+                <div class="style-card-body">
+                    <h3>Cycling Tours & Trips</h3>
+                    <p>Discover the world on two wheels! Explore scenic trails, countryside roads, mountains, and vineyards while enjoying an unforgettable cycling adventure.</p>
+                </div>
+            </div>
+            <div class="style-card">
+                <img src="images/hiking.jpg" width="100%" alt="Hiking">
+                <div class="style-card-body">
+                    <h3>Hiking Tours & Trips</h3>
+                    <p>Breathe in the fresh air and explore beautiful trails, mountains, and breathtaking views. From peaceful walks to exciting treks, every hiking adventure is a chance to escape, explore, and reconnect with nature.</p>
+                </div>
+            </div>
+            <div class="style-card">
+                <img src="images/train.jpg" width="100%" alt="Train/Trail">
+                <div class="style-card-body">
+                    <h3>Train Tours & Rail Trips</h3>
+                    <p>See the world from a different perspective. Travel through breathtaking landscapes, charming cities, and iconic destinations on an unforgettable train journey.</p>
+                </div>
+            </div>
+            <div class="style-card">
+                <img src="images/river.jpg" width="100%" alt="River Cruise">
+                <div class="style-card-body">
+                    <h3>River Cruise Tours & Trips</h3>
+                    <p>Cruise through stunning rivers, explore beautiful destinations, and enjoy a comfortable journey—all in one unforgettable adventure.</p>
+                </div>
+            </div>
+            <div class="style-card">
+                <img src="images/beach.jpg" width="100%" alt="Beach">
+                <div class="style-card-body">
+                    <h3>Beach Tours & Trips</h3>
+                    <p>Escape to paradise with sunny beaches, beautiful islands, stunning sunsets, and unforgettable coastal adventures.</p>
+                </div>
+            </div>
+            <div class="style-card">
+                <img src="images/family.jpg" width="100%" alt="Family Adventures">
+                <div class="style-card-body">
+                    <h3>Family Adventures</h3>
+                    <p>Explore, play, and make unforgettable memories together with fun family adventures, exciting activities, and amazing destinations.</p>
+                </div>
+            </div>
+            <div class="style-card">
+                <img src="images/private.jpg" width="100%" alt="Private Tours">
+                <div class="style-card-body">
+                    <h3>Private Tours & Trips</h3>
+                    <p>Make your adventure truly yours. Customize a ready-to-book tour and enjoy a private journey designed just for your group.</p>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
+    <!--contact section-->
+   <section id="contact" class="contact-section">
+    <div class="contact-container">
 
-  <!-- Menu Section -->
-  <section id="menu" class="menu">
-    <div class="container">
-      <p class="eyebrow center">Curated Selection</p>
-      <h2 class="section-title">Our Menu</h2>
-      <div class="menu-grid">
-        <div class="menu-card">
-          <div class="menu-card-header">Starters</div>
-          <div class="menu-card-body">
-            <div class="menu-item">
-              <div class="menu-item-info">
-                <h4>Truffle Mushroom Soup</h4>
-                <p>Creamy wild mushroom soup with truffle oil drizzle</p>
-              </div>
-              <span class="price">$14</span>
-            </div>
-            <div class="menu-item">
-              <div class="menu-item-info">
-                <h4>Seared Scallops</h4>
-                <p>Pan-seared scallops with citrus beurre blanc</p>
-              </div>
-              <span class="price">$18</span>
-            </div>
-            <div class="menu-item">
-              <div class="menu-item-info">
-                <h4>Burrata Salad</h4>
-                <p>Fresh burrata with heirloom tomatoes and basil</p>
-              </div>
-              <span class="price">$16</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="menu-card featured">
-          <div class="menu-card-header">Main Course</div>
-          <div class="menu-card-body">
-            <div class="menu-item">
-              <div class="menu-item-info">
-                <h4>Wagyu Beef Steak</h4>
-                <p>Grade A5 wagyu with roasted vegetables</p>
-              </div>
-              <span class="price">$65</span>
-            </div>
-            <div class="menu-item">
-              <div class="menu-item-info">
-                <h4>Herb-Crusted Salmon</h4>
-                <p>Atlantic salmon with lemon dill sauce</p>
-              </div>
-              <span class="price">$38</span>
-            </div>
-            <div class="menu-item">
-              <div class="menu-item-info">
-                <h4>Duck Confit</h4>
-                <p>Slow-cooked duck leg with cherry reduction</p>
-              </div>
-              <span class="price">$42</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="menu-card">
-          <div class="menu-card-header">Desserts</div>
-          <div class="menu-card-body">
-            <div class="menu-item">
-              <div class="menu-item-info">
-                <h4>Cr&egrave;me Br&ucirc;l&eacute;e</h4>
-                <p>Classic vanilla bean custard with caramelized sugar</p>
-              </div>
-              <span class="price">$12</span>
-            </div>
-            <div class="menu-item">
-              <div class="menu-item-info">
-                <h4>Chocolate Lava Cake</h4>
-                <p>Warm molten chocolate with vanilla ice cream</p>
-              </div>
-              <span class="price">$14</span>
-            </div>
-            <div class="menu-item">
-              <div class="menu-item-info">
-                <h4>Tiramisu</h4>
-                <p>Espresso-soaked layers with mascarpone cream</p>
-              </div>
-              <span class="price">$13</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Specials Section -->
-  <section id="specials" class="specials">
-    <div class="container">
-      <p class="eyebrow center gold">Reserved Experiences</p>
-      <h2 class="section-title">Chef's Specials</h2>
-      <div class="specials-grid">
-        <div class="special-card">
-          <div class="special-icon" aria-hidden="true">�</div>
-          <h3>Weekend Brunch</h3>
-          <p>Join us every Saturday and Sunday for a curated brunch experience featuring seasonal favorites and unlimited mimosas.</p>
-          <span class="special-price">$45 per person</span>
-        </div>
-        <div class="special-card">
-          <div class="special-icon" aria-hidden="true">🍷</div>
-          <h3>Wine Pairing Dinner</h3>
-          <p>A five-course tasting menu paired with handpicked wines from our sommelier's collection. Available every Thursday.</p>
-          <span class="special-price">$120 per person</span>
-        </div>
-        <div class="special-card">
-          <div class="special-icon" aria-hidden="true">🍰</div>
-          <h3>Dessert Tasting</h3>
-          <p>Indulge in a selection of our pastry chef's finest creations. Perfect for celebrations and sweet endings.</p>
-          <span class="special-price">$35 per person</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Gallery Section -->
-  <section id="gallery" class="gallery">
-    <div class="container">
-      <p class="eyebrow center">Step Inside</p>
-      <h2 class="section-title">Our Ambiance</h2>
-      <div class="gallery-grid">
-        <div class="gallery-item gallery-large">
-          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80" alt="Elegant dining hall with warmly lit tables" loading="lazy">
-          <span class="gallery-caption">Elegant Dining Hall</span>
-        </div>
-        <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1592861956120-e524fc739696?auto=format&fit=crop&w=600&q=80" alt="Cozy private lounge seating area" loading="lazy">
-          <span class="gallery-caption">Private Lounge</span>
-        </div>
-        <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1556909212-d5b604d0c90d?auto=format&fit=crop&w=600&q=80" alt="Chefs working in an open kitchen" loading="lazy">
-          <span class="gallery-caption">Open Kitchen</span>
-        </div>
-        <div class="gallery-item">
-          <img src="https://images.unsplash.com/photo-1533777324565-a040eb52facd?auto=format&fit=crop&w=600&q=80" alt="Outdoor terrace dining with string lights" loading="lazy">
-          <span class="gallery-caption">Outdoor Terrace</span>
-        </div>
-        <div class="gallery-item gallery-wide">
-          <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=1000&q=80" alt="Bar and cocktail lounge with bottles on display" loading="lazy">
-          <span class="gallery-caption">Bar &amp; Cocktail Lounge</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact" class="contact">
-    <div class="container">
-      <p class="eyebrow center gold">Join Us</p>
-      <h2 class="section-title">Reserve a Table</h2>
-      <div class="contact-grid">
+        <!-- Contact Information -->
         <div class="contact-info">
-          <div class="contact-item">
-            <h4><span class="ci-icon" aria-hidden="true">📍</span> Location</h4>
-            <p>123 Culinary Avenue<br>New York, NY 10001</p>
-          </div>
-          <div class="contact-item">
-            <h4><span class="ci-icon" aria-hidden="true">📞</span> Phone</h4>
-            <p>(555) 123-4567</p>
-          </div>
-          <div class="contact-item">
-            <h4><span class="ci-icon" aria-hidden="true">🕐</span> Hours</h4>
-            <p>Mon - Fri: 11:00 AM - 10:00 PM<br>Sat - Sun: 9:00 AM - 11:00 PM</p>
-          </div>
-          <div class="contact-item">
-            <h4><span class="ci-icon" aria-hidden="true">✉️</span> Email</h4>
-            <p>reservations@platecraft.com</p>
-          </div>
-        </div>
-        <form class="reservation-form" action="#" method="post">
-          <div class="form-row">
-            <div class="field">
-              <label for="name">Your Name</label>
-              <input type="text" id="name" placeholder="Jane Doe" required>
-            </div>
-            <div class="field">
-              <label for="email">Your Email</label>
-              <input type="email" id="email" placeholder="jane@email.com" required>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="field">
-              <label for="phone">Phone Number</label>
-              <input type="tel" id="phone" placeholder="(555) 000-0000" required>
-            </div>
-            <div class="field">
-              <label for="guests">Number of Guests</label>
-              <input type="number" id="guests" placeholder="2" min="1" max="20" required>
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="field">
-              <label for="date">Date</label>
-              <input type="date" id="date" required>
-            </div>
-            <div class="field">
-              <label for="time">Time</label>
-              <input type="time" id="time" required>
-            </div>
-          </div>
-          <div class="field">
-            <label for="requests">Special Requests</label>
-            <textarea id="requests" placeholder="Allergies, celebrations, seating preferences..." rows="4"></textarea>
-          </div>
-          <button type="submit" class="btn">Reserve Now</button>
-        </form>
-      </div>
-    </div>
-  </section>
+            <h2>24/7 Customer Support</h2>
 
-  <!-- Footer -->
-  <footer class="footer">
+            <p>
+                Our team of experienced adventure specialists have travelled to
+                hundreds of countries around the globe and have decades of
+                first-hand travel experience to share. Contact us now to have
+                all of your adventure-related questions answered!
+            </p>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form-box">
+            <h3>Ask a Question</h3>
+
+            <form class="contact-form">
+                <!-- First Name or Last Name -->
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="first-name">Your First Name</label>
+                        <input
+                            type="text"
+                            id="first-name"
+                            name="first-name"
+                            placeholder="Your name"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="last-name">Your Last Name</label>
+                        <input
+                            type="text"
+                            id="last-name"
+                            name="last-name"
+                            placeholder="Your last name"
+                            required>
+                    </div>
+                </div>
+
+                <!-- Email + Phone -->
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="contact-email">Email Address</label>
+                        <input
+                            type="email"
+                            id="contact-email"
+                            name="contact-email"
+                            placeholder="Your email address"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone-number">Phone Number</label>
+                        <input
+                            type="tel"
+                            id="phone-number"
+                            name="phone-number"
+                            placeholder="+1 234 5678 9010"
+                            required>
+                    </div>
+                </div>
+
+                <!-- Question -->
+                <div class="form-group">
+                    <label for="question">Your Question</label>
+                    <textarea
+                        id="question"
+                        name="question"
+                        rows="4"
+                        placeholder="Write your question here..."
+                        required>
+                    </textarea>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="contact-btn">Contact Us</button>
+            </form>
+        </div>
+    </div>
+</section>
+                <!-- Basic content why us -->
+<section id="why-us" class="why-us-section">
     <div class="container">
-      <div class="footer-grid">
-        <div class="footer-brand">
-          <a href="#home" class="logo">Plate<span>Craft</span></a>
-          <p>Crafting unforgettable culinary experiences since 2018.</p>
-        </div>
-        <div class="footer-links">
-          <h4>Quick Links</h4>
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#menu">Menu</a>
-          <a href="#contact">Contact</a>
-        </div>
-        <div class="footer-social">
-          <h4>Follow Us</h4>
-          <a href="#">Instagram</a>
-          <a href="#">Facebook</a>
-          <a href="#">Twitter</a>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 PlateCraft. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
 
+        <div class="why-us-heading">
+            <h2>Why Travel With Us?</h2>
+            <p>Everything you need for a perfect trip</p>
+        </div>
+        <div class="why-us-cards">
+
+            <div class="why-us-card">
+                <h3>Handpicked Destinations</h3>
+                <p>Explore carefully selected destinations around the world.</p>
+            </div>
+
+            <div class="why-us-card">
+                <h3>Best Value</h3>
+                <p>Great travel experiences at competitive prices.</p>
+            </div>
+
+            <div class="why-us-card">
+                <h3>Safe & Reliable</h3>
+                <p>Travel with confidence and trusted support.</p>
+            </div>
+
+            <div class="why-us-card">
+                <h3>24/7 Support</h3>
+                <p>We're here whenever you need us during your journey.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+     <!--Booking Section form-->
+    <section id="booking" class="booking-section">
+        <div class="booking-container">
+            <h2>Book Your Dream Trip</h2>
+            <p>Fill in the details below to reserve your travel package</p>
+
+            <form class="booking-form">
+
+                <!--destination selection-->
+                <div class="form-group">
+                    <label for="destination">Where to?</label>
+                    <select id="destination" name="destination" required>
+                        <option value="" disabled selected>Select Destination</option>
+                        <option value="africa">Africa</option>
+                        <option value="europe">Europe</option>
+                        <option value="asia">Asia</option>
+                        <option value="egypt">Egypt</option>
+                        <option value="India">India</option>
+                        <option value="bosania">Bosania</option>
+                    </select>
+                </div>
+
+                <!--travel date part-->
+                <div class="form-group"><label for="travel-date">Travel Date</label>
+                <input type="date" id="travel-date" name="travel-date" required>
+                </div>
+
+                <!--no. of members part-->
+                <div class="form-group">
+                    <label for="guests">Number of Guest</label>
+                    <input type="number" id="guests" name="guests" min="1" max="20" placeholder="1" required>
+                </div>
+
+                <!--User name part-->
+                <div class="form-group"><label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" name="full-name" placeholder="Enter your full name" required>
+                </div>
+                <!--User Email part-->
+                <div class="form-group"><label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Enter Email" required>
+                </div>
+                <!--User phone-number part-->
+                <div class="form-group"><label for="phone">Phone No.</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your Number" required>
+                </div>
+                <!--form submit button-->
+                <button type="submit" class="submit-btn">Confirm Booking</button>
+            </form>
+        </div>
+    </section>
+</main>
+<footer class="footer-section">
+    <div class="footer-container">
+        <!-- Column 1- Company Info -->
+        <div class="footer-col">
+            <h3>Company</h3>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#tours">Tours</a></li>
+                <li><a href="#styles">Styles</a></li>
+            </ul>
+        </div>
+        <!--Column 2-Company Contact Details-->
+        <div class="footer-contact-details">
+            <h3>Support</h3>
+            <p>Phone:+31 9875462131</p>
+            <p>Email:support@tourtravel.com</p>
+            <p>Location: 125 Madison Avenue, New York, NY 10016, USA</p>
+        </div>
+        <!-- Column 3-Legal Links -->
+        <div class="footer-col">
+            <h4>Legal</h4>
+            <ul>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Refund Policy</a></li>
+            </ul>
+        </div>
+        <!-- Column 4-Social Media & Payment Options -->
+         <div class="footer-col footer-social">
+            <h4>Follow Us</h4>
+            <div class="social-links">
+                <a href="https://facebook.com" target="_blank">facebook</a>
+                <a href="https://instagram.com" target="_blank">Instagram</a>
+                <a href="https://twitter.com" target="_blank">Twitter</a>
+            </div>
+            <h4>Payment Methods</h4>
+            <div class="payment-methods">
+                <span>Credit/Debit Card</span>
+                <span>UPI/Gpay</span>
+                <span>Net Banking</span>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+    <p>&copy; 2026 Tour & Travel. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- signup form -->
+<div id="signup-modal" class="modal-overlay">
+    <div class="modal-box">
+        <!-- Close Button (Window band karne ke liye) -->
+        <a href="#" class="close-btn">&times;</a>
+        <h2>Sign Up</h2>
+        <p>Create an account or login to continue</p>
+        <form class="modal-form">
+            <div class="form-group">
+                <label for="reg-name">Full Name</label>
+                <input type="text" id="reg-name" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="reg-email">Email Address</label>
+                <input type="email" id="reg-email" placeholder="Enter your email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="reg-password">Password</label>
+                <input type="password" id="reg-password" placeholder="Create a password" required>
+            </div>
+
+            <div class="form-tabs">
+            <button class="tab-btn active">Sign Up</button>
+            <button class="tab-btn">Login</button>
+            </div>
+
+            <label class="remember-me">
+                <input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px">Remember me
+            </label>
+            <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+            <button type="submit" class="submit-btn">Create Account</button>
+        </form>
+    </div>
+</div>
 </body>
 </html>
