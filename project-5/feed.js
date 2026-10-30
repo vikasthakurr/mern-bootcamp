@@ -1,77 +1,46 @@
-// feed.js — a simulated real-time market data feed.
+import { wait } from "./util.js";
 
-/** A single price update for one symbol. */
-export class Tick {
-  constructor(symbol, price, prevPrice, time = Date.now()) {
-    this.symbol = symbol;
-    this.price = price;
-    this.prevPrice = prevPrice;
-    this.time = time;
-  }
+const DEFAULT_TICK_MS = 900;
+const DEFAULT_VOLATILITY = 0.012;
+const MIN_PRICE = 1;
+const CONNECT_DELAY_MS = 600;
 
-  get delta() {
-    return this.price - this.prevPrice;
-  }
-
-  get direction() {
-    if (this.price > this.prevPrice) return "up";
-    if (this.price < this.prevPrice) return "down";
-    return "flat";
-  }
+function cleanPrice(value) {
+  const floored = value < MIN_PRICE ? MIN_PRICE + Math.random() : value;
+  return Math.round(floored * 100) / 100;
 }
 
-/** Simulates a streaming quote source over a pub/sub interface. */
-export class MarketFeed {
-  #prices = new Map();
-  #listeners = new Map();
-  #controller = null;
-  #tickMs;
-  #volatility;
+export function createTick(symbol, price, prevPrice, time = Date.now()) {
+  return {
+    symbol,
+    price,
+    prevPrice,
+    time,
+    get delta() {
+      return price - prevPrice;
+    },
+    get direction() {
+      if (price > prevPrice) return "up";
+      if (price < prevPrice) return "down";
+      return "flat";
+    },
+  };
+}
 
-  constructor(seed, { tickMs = 900, volatility = 0.012 } = {}) {
-    for (const { symbol, price } of seed) {
-      this.#prices.set(symbol, price);
-    }
-    this.#tickMs = tickMs;
-    this.#volatility = volatility;
+export function createMarketFeed(
+  seed,
+  { tickMs = DEFAULT_TICK_MS, volatility = DEFAULT_VOLATILITY } = {},
+) {
+  const prices = new Map();
+  const listeners = new Map();
+  let controller = null;
+
+  for (const { symbol, price } of seed) {
+    prices.set(symbol, price);
   }
 
-  get connected() {
-    return this.#controller !== null;
-  }
-
-  get symbols() {
-    return [...this.#prices.keys()];
-  }
-
-  priceOf(symbol) {
-    return this.#prices.get(symbol);
-  }
-
-  /**
-   * Apply an external shock to a symbol's price (e.g. a news event) as a
-   * signed fraction such as +0.03. Emits a Tick and returns the new price.
-   */
-  nudge(symbol, fraction) {
-    if (!this.#prices.has(symbol) || !fraction) return null;
-    const prev = this.#prices.get(symbol);
-    let next = prev * (1 + fraction);
-    if (next < 1) next = 1 + Math.random();
-    next = Math.round(next * 100) / 100;
-    this.#prices.set(symbol, next);
-    const tick = new Tick(symbol, next, prev);
-    this.#emit("tick", tick);
-    return next;
-  }
-
-  on(event, callback) {
-    if (!this.#listeners.has(event)) this.#listeners.set(event, new Set());
-    this.#listeners.get(event).add(callback);
-    return () => this.#listeners.get(event)?.delete(callback);
-  }
-
-  #emit(event, payload) {
-    const set = this.#listeners.get(event);
+  function emit(event, payload) {
+    const set = listeners.get(event);
     if (!set) return;
     for (const cb of set) {
       try {
@@ -82,77 +51,92 @@ export class MarketFeed {
     }
   }
 
-  /** Resolve after a simulated connection handshake. */
-  connect() {
-    this.#emit("status", "connecting");
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        this.#emit("status", "connected");
-        resolve(this);
-      }, 600);
-    });
+  function symbols() {
+    return [...prices.keys()];
   }
 
-  start() {
-    if (this.#controller) return;
-    this.#controller = new AbortController();
-    this.#run(this.#controller.signal);
-    this.#emit("status", "streaming");
+  function nextPrice(price) {
+    const drift = (Math.random() - 0.5) * 2 * volatility;
+    return cleanPrice(price * (1 + drift));
   }
 
-  stop() {
-    this.#controller?.abort();
-    this.#controller = null;
-    this.#emit("status", "stopped");
+  async function* stream(signal) {
+    while (!signal.aborted) {
+      await wait(tickMs, signal);
+      if (signal.aborted) return;
+
+      const all = symbols();
+      const symbol = all[Math.floor(Math.random() * all.length)];
+      const prev = prices.get(symbol);
+      const next = nextPrice(prev);
+      prices.set(symbol, next);
+
+      yield createTick(symbol, next, prev);
+    }
   }
 
-  async #run(signal) {
+  async function run(signal) {
     try {
-      for await (const tick of this.#stream(signal)) {
-        this.#emit("tick", tick);
+      for await (const tick of stream(signal)) {
+        emit("tick", tick);
       }
     } catch (err) {
       if (err?.name !== "AbortError") {
         console.error("[feed] stream error:", err);
-        this.#emit("error", err);
+        emit("error", err);
       }
     }
   }
 
-  async *#stream(signal) {
-    while (!signal.aborted) {
-      await MarketFeed.#wait(this.#tickMs, signal);
-      if (signal.aborted) return;
+  return {
+    get connected() {
+      return controller !== null;
+    },
 
-      const symbols = this.symbols;
-      const symbol = symbols[Math.floor(Math.random() * symbols.length)];
-      const prev = this.#prices.get(symbol);
-      const next = this.#nextPrice(prev);
-      this.#prices.set(symbol, next);
+    get symbols() {
+      return symbols();
+    },
 
-      yield new Tick(symbol, next, prev);
-    }
-  }
+    priceOf(symbol) {
+      return prices.get(symbol);
+    },
 
-  #nextPrice(price) {
-    const drift = (Math.random() - 0.5) * 2 * this.#volatility;
-    let next = price * (1 + drift);
-    if (next < 1) next = 1 + Math.random();
-    return Math.round(next * 100) / 100;
-  }
+    nudge(symbol, fraction) {
+      if (!prices.has(symbol) || !fraction) return null;
+      const prev = prices.get(symbol);
+      const next = cleanPrice(prev * (1 + fraction));
+      prices.set(symbol, next);
+      emit("tick", createTick(symbol, next, prev));
+      return next;
+    },
 
-  /** Promisified delay that rejects with AbortError when the signal fires. */
-  static #wait(ms, signal) {
-    return new Promise((resolve, reject) => {
-      const id = setTimeout(resolve, ms);
-      signal.addEventListener(
-        "abort",
-        () => {
-          clearTimeout(id);
-          reject(new DOMException("Aborted", "AbortError"));
-        },
-        { once: true }
-      );
-    });
-  }
+    on(event, callback) {
+      if (!listeners.has(event)) listeners.set(event, new Set());
+      listeners.get(event).add(callback);
+      return () => listeners.get(event)?.delete(callback);
+    },
+
+    connect() {
+      emit("status", "connecting");
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          emit("status", "connected");
+          resolve(this);
+        }, CONNECT_DELAY_MS);
+      });
+    },
+
+    start() {
+      if (controller) return;
+      controller = new AbortController();
+      run(controller.signal);
+      emit("status", "streaming");
+    },
+
+    stop() {
+      controller?.abort();
+      controller = null;
+      emit("status", "stopped");
+    },
+  };
 }

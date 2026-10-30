@@ -3,9 +3,12 @@
   --jc-primary: #4f46e5;
   --jc-primary-dark: #4338ca;
   --jc-primary-soft: #eef2ff;
+  --jc-accent: #818cf8;
   --jc-ink: #0f172a;
   --jc-muted: #64748b;
   --jc-bg: #f8fafc;
+  --jc-surface: #f1f5f9;
+  --jc-border: #eef2f7;
   --jc-radius: 1rem;
 }
 
@@ -59,9 +62,7 @@ a {
   background-color: var(--jc-bg) !important;
 }
 
-/* generous vertical rhythm helper */
-.py-lg-6 {
-}
+/* Generous vertical rhythm on large screens */
 @media (min-width: 992px) {
   .py-lg-6 {
     padding-top: 5.5rem !important;
@@ -80,7 +81,7 @@ a {
   width: 38px;
   height: 38px;
   border-radius: 11px;
-  background: linear-gradient(135deg, var(--jc-primary), #818cf8);
+  background: linear-gradient(135deg, var(--jc-primary), var(--jc-accent));
   color: #fff;
   font-size: 1.05rem;
 }
@@ -141,12 +142,14 @@ a {
 .link-tag {
   display: inline-block;
   color: var(--jc-muted);
-  background: #f1f5f9;
+  background: var(--jc-surface);
   padding: 0.15rem 0.6rem;
   border-radius: 999px;
   margin: 0.15rem 0.1rem;
   font-weight: 500;
-  transition: all 0.15s ease;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
 }
 .link-tag:hover {
   color: var(--jc-primary);
@@ -182,7 +185,7 @@ a {
   background: #fff;
   border-radius: 14px;
   padding: 0.75rem 1rem;
-  border: 1px solid #eef2f7;
+  border: 1px solid var(--jc-border);
 }
 .card-stat {
   top: 1.5rem;
@@ -222,7 +225,7 @@ a {
 
 /* ===================== How It Works ===================== */
 .step-card {
-  border: 1px solid #eef2f7;
+  border: 1px solid var(--jc-border);
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
@@ -238,7 +241,7 @@ a {
   width: 46px;
   height: 46px;
   border-radius: 13px;
-  background: linear-gradient(135deg, var(--jc-primary), #818cf8);
+  background: linear-gradient(135deg, var(--jc-primary), var(--jc-accent));
   color: #fff;
   font-weight: 800;
   font-size: 1.2rem;
@@ -246,7 +249,7 @@ a {
 
 /* ===================== Job Cards ===================== */
 .job-card {
-  border: 1px solid #eef2f7;
+  border: 1px solid var(--jc-border);
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease,
@@ -274,7 +277,7 @@ a {
 .tag {
   font-size: 0.8rem;
   color: var(--jc-muted);
-  background: #f1f5f9;
+  background: var(--jc-surface);
   padding: 0.25rem 0.6rem;
   border-radius: 8px;
   font-weight: 500;
@@ -296,7 +299,7 @@ a {
 
 /* ===================== Testimonials ===================== */
 .testimonial-card {
-  border: 1px solid #eef2f7;
+  border: 1px solid var(--jc-border);
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;

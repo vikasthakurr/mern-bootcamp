@@ -1,137 +1,152 @@
-// portfolio.js — the trading domain model.
+const MAX_HISTORY = 40;
+export const STARTING_CASH = 100000;
 
-/** A tradable instrument with a live price and a rolling price history. */
-export class Instrument {
-  constructor({ symbol, name, price }) {
-    this.symbol = symbol;
-    this.name = name;
-    this.price = price;
-    this.open = price;
-    this.history = [price];
-    this.maxHistory = 40;
-  }
+export function createInstrument({ symbol, name, price }) {
+  const open = price;
+  const priceHistory = [price];
 
-  update(price) {
-    this.price = price;
-    this.history.push(price);
-    if (this.history.length > this.maxHistory) this.history.shift();
-  }
+  const inst = {
+    symbol,
+    name,
+    price,
+    open,
 
-  get changePct() {
-    if (this.open === 0) return 0;
-    return ((this.price - this.open) / this.open) * 100;
-  }
+    update(next) {
+      inst.price = next;
+      priceHistory.push(next);
+      if (priceHistory.length > MAX_HISTORY) priceHistory.shift();
+    },
 
-  get direction() {
-    if (this.price > this.open) return "up";
-    if (this.price < this.open) return "down";
-    return "flat";
-  }
+    get history() {
+      return [...priceHistory];
+    },
+
+    get changePct() {
+      if (open === 0) return 0;
+      return ((inst.price - open) / open) * 100;
+    },
+
+    get direction() {
+      if (inst.price > open) return "up";
+      if (inst.price < open) return "down";
+      return "flat";
+    },
+  };
+
+  return inst;
 }
 
-/** A holding in a single instrument: quantity + average cost basis. */
-export class Position {
-  constructor(symbol) {
-    this.symbol = symbol;
-    this.qty = 0;
-    this.avgCost = 0;
-  }
+export function createPosition(symbol) {
+  const pos = {
+    symbol,
+    qty: 0,
+    avgCost: 0,
 
-  get isOpen() {
-    return this.qty > 0;
-  }
+    get isOpen() {
+      return pos.qty > 0;
+    },
 
-  addShares(qty, price) {
-    const totalCost = this.avgCost * this.qty + price * qty;
-    this.qty += qty;
-    this.avgCost = this.qty === 0 ? 0 : totalCost / this.qty;
-  }
+    addShares(qty, price) {
+      const totalCost = pos.avgCost * pos.qty + price * qty;
+      pos.qty += qty;
+      pos.avgCost = pos.qty === 0 ? 0 : totalCost / pos.qty;
+    },
 
-  removeShares(qty) {
-    this.qty = Math.max(0, this.qty - qty);
-    if (this.qty === 0) this.avgCost = 0;
-  }
+    removeShares(qty) {
+      pos.qty = Math.max(0, pos.qty - qty);
+      if (pos.qty === 0) pos.avgCost = 0;
+    },
 
-  marketValue(price) {
-    return this.qty * price;
-  }
+    marketValue(price) {
+      return pos.qty * price;
+    },
 
-  unrealisedPnL(price) {
-    return (price - this.avgCost) * this.qty;
-  }
+    unrealisedPnL(price) {
+      return (price - pos.avgCost) * pos.qty;
+    },
+  };
+
+  return pos;
 }
 
-/** Raised when an order cannot be executed. */
-export class OrderError extends Error {
-  constructor(message) {
-    super(message);
-    this.name = "OrderError";
-  }
+export function createOrderError(message) {
+  const err = new Error(message);
+  err.name = "OrderError";
+  return err;
 }
 
-/** The account: cash, positions, and the executed-trade blotter. */
-export class Portfolio {
-  constructor(startingCash = 100000) {
-    this.cash = startingCash;
-    this.positions = new Map();
-    this.trades = [];
+export function isOrderError(err) {
+  return err instanceof Error && err.name === "OrderError";
+}
+
+export function createPortfolio(startingCash = STARTING_CASH) {
+  const positions = new Map();
+  const trades = [];
+
+  function positionFor(symbol) {
+    if (!positions.has(symbol)) {
+      positions.set(symbol, createPosition(symbol));
+    }
+    return positions.get(symbol);
   }
 
-  positionFor(symbol) {
-    if (!this.positions.has(symbol)) {
-      this.positions.set(symbol, new Position(symbol));
-    }
-    return this.positions.get(symbol);
-  }
-
-  /** Execute a market order; returns the trade record or throws OrderError. */
-  execute({ side, symbol, qty, price }) {
-    qty = Math.floor(Number(qty));
-    if (!Number.isFinite(qty) || qty <= 0) {
-      throw new OrderError("Enter a whole quantity of 1 or more.");
-    }
-
-    const cost = qty * price;
-    const position = this.positionFor(symbol);
-
-    if (side === "buy") {
-      if (cost > this.cash) {
-        throw new OrderError("Not enough cash for this order.");
-      }
-      this.cash -= cost;
-      position.addShares(qty, price);
-    } else if (side === "sell") {
-      if (qty > position.qty) {
-        throw new OrderError(`You only hold ${position.qty} share(s).`);
-      }
-      this.cash += cost;
-      position.removeShares(qty);
-    } else {
-      throw new OrderError(`Unknown order side "${side}".`);
-    }
-
-    const trade = {
-      id: crypto.randomUUID?.() ?? String(Date.now() + Math.random()),
-      side,
-      symbol,
-      qty,
-      price,
-      total: cost,
-      time: Date.now(),
-    };
-    this.trades.push(trade);
-    return trade;
-  }
-
-  holdingsValue(priceLookup) {
+  function holdingsValue(priceLookup) {
     let sum = 0;
-    for (const pos of this.positions.values()) {
+    for (const pos of positions.values()) {
       if (pos.isOpen) sum += pos.marketValue(priceLookup(pos.symbol));
     }
     return sum;
   }
 
-  netWorth(priceLookup) {
-    return this.cash + this.holdingsValue(priceLookup);
-  }
+  return {
+    cash: startingCash,
+    positions,
+    trades,
+
+    positionFor,
+
+    execute({ side, symbol, qty, price }) {
+      qty = Math.floor(Number(qty));
+      if (!Number.isFinite(qty) || qty <= 0) {
+        throw createOrderError("Enter a whole quantity of 1 or more.");
+      }
+
+      const cost = qty * price;
+      const position = positionFor(symbol);
+
+      if (side === "buy") {
+        if (cost > this.cash) {
+          throw createOrderError("Not enough cash for this order.");
+        }
+        this.cash -= cost;
+        position.addShares(qty, price);
+      } else if (side === "sell") {
+        if (qty > position.qty) {
+          throw createOrderError(`You only hold ${position.qty} share(s).`);
+        }
+        this.cash += cost;
+        position.removeShares(qty);
+      } else {
+        throw createOrderError(`Unknown order side "${side}".`);
+      }
+
+      const trade = {
+        id: crypto.randomUUID?.() ?? String(Date.now() + Math.random()),
+        side,
+        symbol,
+        qty,
+        price,
+        total: cost,
+        time: Date.now(),
+      };
+      trades.push(trade);
+      return trade;
+    },
+
+    holdingsValue,
+
+    netWorth(priceLookup) {
+      return this.cash + holdingsValue(priceLookup);
+    },
+  };
 }

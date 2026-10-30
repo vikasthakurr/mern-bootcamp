@@ -1,9 +1,12 @@
-// app.js — controller: binds the feed, news, model, and AI to the DOM.
-
-import { MarketFeed } from "./feed.js";
-import { Instrument, Portfolio, OrderError } from "./portfolio.js";
-import { NewsWire } from "./news.js";
-import { GeminiAnalyst } from "./gemini.js";
+import { createMarketFeed } from "./feed.js";
+import {
+  createInstrument,
+  createPortfolio,
+  isOrderError,
+  STARTING_CASH,
+} from "./portfolio.js";
+import { createNewsWire } from "./news.js";
+import { createGeminiAnalyst } from "./gemini.js";
 
 const SEED = [
   { symbol: "AAPL", name: "Apple Inc.", price: 224.31 },
@@ -14,13 +17,15 @@ const SEED = [
   { symbol: "GOOGL", name: "Alphabet Inc.", price: 165.28 },
 ];
 
-const instruments = new Map(SEED.map((s) => [s.symbol, new Instrument(s)]));
-const portfolio = new Portfolio(100000);
-const feed = new MarketFeed(
-  SEED.map(({ symbol, price }) => ({ symbol, price }))
+const instruments = new Map(SEED.map((s) => [s.symbol, createInstrument(s)]));
+const portfolio = createPortfolio(STARTING_CASH);
+const feed = createMarketFeed(
+  SEED.map(({ symbol, price }) => ({ symbol, price })),
 );
-const newsWire = new NewsWire(SEED.map(({ symbol, name }) => ({ symbol, name })));
-const analyst = new GeminiAnalyst();
+const newsWire = createNewsWire(
+  SEED.map(({ symbol, name }) => ({ symbol, name })),
+);
+const analyst = createGeminiAnalyst();
 
 const priceLookup = (symbol) => instruments.get(symbol)?.price ?? 0;
 
@@ -65,8 +70,6 @@ const money = new Intl.NumberFormat("en-US", {
 const fmt = (n) => money.format(n);
 const pct = (n) => `${n >= 0 ? "+" : ""}${n.toFixed(2)}%`;
 
-// ---- Watchlist --------------------------------------------------------------
-
 function buildWatchlist() {
   el.watchlist.replaceChildren();
   for (const inst of instruments.values()) {
@@ -99,7 +102,7 @@ function paintRow(inst, flash = null) {
 
   if (flash) {
     row.classList.remove("flash-up", "flash-down");
-    void row.offsetWidth; // reflow so the animation retriggers on rapid ticks
+    void row.offsetWidth;
     row.classList.add(flash === "up" ? "flash-up" : "flash-down");
   }
 }
@@ -109,8 +112,6 @@ function updateSelectionHighlight() {
     row.classList.toggle("active", row.dataset.symbol === selectedSymbol);
   }
 }
-
-// ---- Detail panel -----------------------------------------------------------
 
 function renderDetail() {
   const inst = instruments.get(selectedSymbol);
@@ -161,11 +162,8 @@ function renderPosition(inst) {
   }
   const pnl = pos.unrealisedPnL(inst.price);
   const sign = pnl >= 0 ? "+" : "";
-  el.positionValue.textContent =
-    `${pos.qty} @ ${fmt(pos.avgCost)} · ${sign}${fmt(pnl)}`;
+  el.positionValue.textContent = `${pos.qty} @ ${fmt(pos.avgCost)} · ${sign}${fmt(pnl)}`;
 }
-
-// ---- Account + order --------------------------------------------------------
 
 function renderAccount() {
   el.cashValue.textContent = fmt(portfolio.cash);
@@ -201,8 +199,6 @@ function flashOrderMsg(text, kind) {
   }
 }
 
-// ---- Trade log --------------------------------------------------------------
-
 function addTradeToLog(trade) {
   const empty = el.tradeLog.querySelector(".log-empty");
   if (empty) empty.remove();
@@ -226,8 +222,6 @@ function addTradeToLog(trade) {
   }`;
 }
 
-// ---- News wire --------------------------------------------------------------
-
 function addHeadlineToFeed(headline) {
   const empty = el.newsFeed.querySelector(".news-empty");
   if (empty) empty.remove();
@@ -250,8 +244,6 @@ function addHeadlineToFeed(headline) {
     el.newsFeed.lastElementChild.remove();
   }
 }
-
-// ---- AI analyst -------------------------------------------------------------
 
 function setAnalystStatus(message, isError = false) {
   el.analystStatus.textContent = message;
@@ -296,12 +288,15 @@ function buildSnapshot() {
 function renderBriefing(text) {
   el.analystOutput.replaceChildren();
   const labels = ["Market", "Portfolio", "Watch"];
-  const lines = text.split("\n").map((l) => l.trim()).filter(Boolean);
+  const lines = text
+    .split("\n")
+    .map((l) => l.trim())
+    .filter(Boolean);
 
   let matchedAny = false;
   for (const line of lines) {
     const label = labels.find((l) =>
-      line.toLowerCase().startsWith(l.toLowerCase() + ":")
+      line.toLowerCase().startsWith(l.toLowerCase() + ":"),
     );
     const row = document.createElement("div");
     row.className = "brief-line";
@@ -348,8 +343,6 @@ async function requestBriefing() {
   }
 }
 
-// ---- Event wiring -----------------------------------------------------------
-
 el.watchlist.addEventListener("click", (e) => {
   const row = e.target.closest(".ticker-row");
   if (!row) return;
@@ -382,11 +375,11 @@ el.orderForm.addEventListener("submit", (e) => {
     renderPosition(inst);
     flashOrderMsg(
       `Filled: ${trade.side} ${trade.qty} ${trade.symbol} @ ${fmt(trade.price)}`,
-      "ok"
+      "ok",
     );
     console.log("[order] filled", trade);
   } catch (err) {
-    if (err instanceof OrderError) {
+    if (isOrderError(err)) {
       flashOrderMsg(err.message, "err");
     } else {
       flashOrderMsg("Something went wrong placing the order.", "err");
@@ -416,8 +409,6 @@ el.feedBtn.addEventListener("click", async () => {
 });
 
 el.briefBtn.addEventListener("click", requestBriefing);
-
-// ---- Feed subscriptions -----------------------------------------------------
 
 function setConn(state, label) {
   el.connBadge.dataset.state = state;
@@ -459,27 +450,22 @@ feed.on("error", (err) => {
   setConn("off", "● error");
 });
 
-// ---- News wire subscriptions ------------------------------------------------
-
 newsWire.on("headline", (headline) => {
   addHeadlineToFeed(headline);
 
   recentNews.unshift(headline);
   if (recentNews.length > 12) recentNews.pop();
 
-  // News moves the market via feed.nudge, which emits a tick.
   if (headline.priceEffect) {
     feed.nudge(headline.symbol, headline.priceEffect);
   }
 
   console.log(
-    `[news] ${headline.sentiment.toUpperCase()} ${headline.symbol}: ${headline.text}`
+    `[news] ${headline.sentiment.toUpperCase()} ${headline.symbol}: ${headline.text}`,
   );
 });
 
 newsWire.on("error", (err) => console.error("[news] error:", err));
-
-// ---- Boot -------------------------------------------------------------------
 
 function init() {
   buildWatchlist();
@@ -496,7 +482,7 @@ function init() {
   console.log(
     "%cTradeStream ready.",
     "color:#4ea8ff;font-weight:bold",
-    "Click “Connect feed” to start streaming simulated prices and news."
+    "Click “Connect feed” to start streaming simulated prices and news.",
   );
 }
 
